@@ -1,0 +1,9 @@
+{
+    "test_mode": false,
+    "output_file": "build/stage4.svg",
+    "overwrite_output": true,
+    "ascii_tree": false,
+    "max_depth": 10,
+    "exclude_substring": "",
+    "load_order": true
+}

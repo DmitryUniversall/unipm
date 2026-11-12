@@ -7,6 +7,7 @@ import com.universall.core.impl.data.client.HttpTextClient
 import com.universall.core.impl.data.maven.MavenPomFetcher
 import com.universall.core.impl.data.test.TestRepositoryLoader
 import com.universall.core.impl.domain.graph.DependencyGraphBuilder
+import com.universall.core.impl.domain.graph.order.DependencyOrderResolver
 import com.universall.core.impl.domain.maven.pom.PomParser
 import com.universall.core.impl.domain.resolver.maven.MavenDependenciesResolver
 import com.universall.core.impl.domain.resolver.test.TestDependenciesResolver
@@ -25,7 +26,11 @@ interface UniPm {
                 MavenDependenciesResolver(packageInfo = packageInfo, pomFetcher = pomFetcher)
             }
 
-            return UniPmImpl(config = config, graphBuilder = DependencyGraphBuilder(resolver = resolver))
+            return UniPmImpl(
+                config = config,
+                graphBuilder = DependencyGraphBuilder(resolver = resolver),
+                orderResolver = DependencyOrderResolver(),
+            )
         }
     }
 }

@@ -7,4 +7,5 @@ data class AppConfig(
     val maxDepth: Int,
     val excludeSubstring: String,
     val overwriteOutput: Boolean = false,
+    val loadOrder: Boolean = false,
 )

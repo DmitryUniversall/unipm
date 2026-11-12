@@ -23,6 +23,9 @@ internal data class JsonAppConfigDocument(
 
     @SerialName(value = "overwrite_output")
     val overwriteOutput: Boolean = false,
+
+    @SerialName(value = "load_order")
+    val loadOrder: Boolean = false,
 ) {
     fun toAppConfig(): AppConfig = AppConfig(
         testMode = testMode,
@@ -31,5 +34,6 @@ internal data class JsonAppConfigDocument(
         maxDepth = maxDepth,
         excludeSubstring = excludeSubstring,
         overwriteOutput = overwriteOutput,
+        loadOrder = loadOrder,
     )
 }
