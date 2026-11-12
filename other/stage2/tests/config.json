@@ -1,0 +1,8 @@
+{
+    "test_mode": false,
+    "output_file": "build/stage2.svg",
+    "overwrite_output": true,
+    "ascii_tree": false,
+    "max_depth": 3,
+    "exclude_substring": ""
+}

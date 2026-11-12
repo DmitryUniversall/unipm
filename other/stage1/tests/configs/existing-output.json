@@ -1,0 +1,8 @@
+{
+    "test_mode": false,
+    "output_file": "other/stage1/tests/existing.svg",
+    "ascii_tree": false,
+    "max_depth": 3,
+    "exclude_substring": "",
+    "overwrite_output": false
+}

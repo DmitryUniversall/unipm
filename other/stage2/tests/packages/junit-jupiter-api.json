@@ -1,0 +1,5 @@
+{
+    "name": "org.junit.jupiter:junit-jupiter-api",
+    "version": "5.10.0",
+    "repository": "https://repo.maven.apache.org/maven2"
+}
