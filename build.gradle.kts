@@ -1,6 +1,8 @@
 plugins {
-    id("java")
-    kotlin("jvm")
+    application
+
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 group = "com.universall"
@@ -11,15 +13,25 @@ repositories {
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    implementation(kotlin("stdlib-jdk8"))
+    implementation(libs.kotlinx.serialization.json)
+
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.junit.jupiter)
+    testRuntimeOnly(libs.junit.platform.launcher)
+}
+
+application {
+    mainClass.set("com.universall.MainKt")
 }
 
 tasks.test {
     useJUnitPlatform()
 }
+
 kotlin {
-    jvmToolchain(25)
+    jvmToolchain(jdkVersion = 25)
+
+    sourceSets.named("test") {
+        kotlin.srcDir("tests")
+    }
 }
