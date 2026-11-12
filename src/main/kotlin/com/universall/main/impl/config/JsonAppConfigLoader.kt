@@ -1,7 +1,7 @@
-package com.universall.main.config
+package com.universall.main.impl.config
 
-import com.universall.common.config.AppConfigLoader
-import com.universall.core.model.config.AppConfig
+import com.universall.common.api.config.AppConfigLoader
+import com.universall.core.api.model.config.AppConfig
 import kotlinx.serialization.json.Json
 import java.io.IOException
 import java.nio.file.Files

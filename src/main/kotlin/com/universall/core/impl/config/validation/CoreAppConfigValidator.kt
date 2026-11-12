@@ -1,7 +1,7 @@
-package com.universall.core.config.validation
+package com.universall.core.impl.config.validation
 
-import com.universall.common.config.AppConfigValidator
-import com.universall.core.model.config.AppConfig
+import com.universall.common.api.config.AppConfigValidator
+import com.universall.core.api.model.config.AppConfig
 import java.nio.file.Files
 import java.nio.file.InvalidPathException
 import java.nio.file.LinkOption

@@ -1,4 +1,4 @@
-package com.universall.main.model.cli
+package com.universall.main.impl.model.cli
 
 data class LaunchOptions(
     val configPath: String? = null,

@@ -1,4 +1,4 @@
-package com.universall.common.cli
+package com.universall.common.api.cli
 
 sealed class LaunchOption<T : Any>(
     val key: LaunchOptionKey<T>,

@@ -1,4 +1,4 @@
-package com.universall.core.model.pkg
+package com.universall.core.api.model.pkg
 
 data class PackageInfo(
     val name: String,

@@ -1,4 +1,4 @@
-package com.universall.core.model.config
+package com.universall.core.api.model.config
 
 data class AppConfig(
     val testMode: Boolean,

@@ -1,9 +1,9 @@
-package com.universall.core
+package com.universall.core.impl
 
-import com.universall.core.config.validation.CoreAppConfigValidator
-import com.universall.core.model.config.AppConfig
+import com.universall.core.api.model.config.AppConfig
+import com.universall.core.impl.config.validation.CoreAppConfigValidator
 
-class UniPM(
+class UniPMImpl(
     private val config: AppConfig,
 ) {
     private val coreConfigValidator = CoreAppConfigValidator()

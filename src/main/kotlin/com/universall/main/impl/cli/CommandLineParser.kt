@@ -1,9 +1,9 @@
-package com.universall.main.cli
+package com.universall.main.impl.cli
 
-import com.universall.common.cli.LaunchOption
-import com.universall.common.cli.LaunchOptionKey
-import com.universall.common.cli.LaunchOptionsParser
-import com.universall.main.model.cli.LaunchOptions
+import com.universall.common.api.cli.LaunchOption
+import com.universall.common.api.cli.LaunchOptionKey
+import com.universall.common.api.cli.LaunchOptionsParser
+import com.universall.main.impl.model.cli.LaunchOptions
 
 class CommandLineParser {
     fun parse(arguments: Array<String>): LaunchOptions {

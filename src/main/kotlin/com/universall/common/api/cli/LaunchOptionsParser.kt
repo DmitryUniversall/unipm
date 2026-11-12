@@ -1,4 +1,4 @@
-package com.universall.common.cli
+package com.universall.common.api.cli
 
 class LaunchOptionsParser(
     options: List<LaunchOption<*>>,

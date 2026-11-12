@@ -1,6 +1,6 @@
-package com.universall.main.config
+package com.universall.main.impl.config
 
-import com.universall.core.model.config.AppConfig
+import com.universall.core.api.model.config.AppConfig
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
