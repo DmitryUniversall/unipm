@@ -1,57 +1,6 @@
-Сравнение UniPM и Maven, 13.11.2026
+Сравнение для org.junit.jupiter:junit-jupiter-api:5.10.0
 
-Пакет: org.junit.jupiter:junit-jupiter-api:5.10.0.
-Maven 3.9.9, Java 17.0.17, maven-dependency-plugin 3.11.0.
-Для Maven использован отдельный, изначально пустой dev/stage4-maven-repository.
-В UniPM: max_depth=10, фильтр отключён, load_order=true.
+UniPM: opentest4j → apiguardian-api - junit-platform-commons - junit-jupiter-api
+Maven dependency:resolve: junit-jupiter-api - opentest4j - junit-platform-commons - apiguardian-api
 
-Maven взят из существующего кэша ~/.m2/wrapper/dists/apache-maven-3.9.9-bin/.
-Команды из корня проекта, Git Bash; для них Maven должен быть в PATH:
-
-./gradlew run --args='--config other/stage4/comparison/config.json --package "org.junit.jupiter:junit-jupiter-api:5.10.0@https://repo.maven.apache.org/maven2"'
-
-mvn -B -Dstyle.color=never -Dmaven.repo.local=C:/Users/Universall/IdeaProjects/unipm/dev/stage4-maven-repository -f other/stage4/comparison/pom.xml org.apache.maven.plugins:maven-dependency-plugin:3.11.0:tree org.apache.maven.plugins:maven-dependency-plugin:3.11.0:resolve
-mvn -B -Dstyle.color=never -Dmaven.repo.local=C:/Users/Universall/IdeaProjects/unipm/dev/stage4-maven-repository -f other/stage4/comparison/pom.xml org.apache.maven.plugins:maven-dependency-plugin:3.11.0:tree -Dverbose
-
-При повторе Maven использует кэш. Для нового наблюдения скачиваний нужно указать другой пустой каталог maven.repo.local.
-
-Вывод UniPM:
-Dependency loading order for org.junit.jupiter:junit-jupiter-api:5.10.0:
-org.opentest4j:opentest4j:1.3.0
-org.apiguardian:apiguardian-api:1.1.2
-org.junit.platform:junit-platform-commons:1.10.0
-org.junit.jupiter:junit-jupiter-api:5.10.0
-
-Вывод Maven dependency:resolve:
-[INFO]    org.junit.jupiter:junit-jupiter-api:jar:5.10.0:compile -- module org.junit.jupiter.api
-[INFO]    org.opentest4j:opentest4j:jar:1.3.0:compile -- module org.opentest4j
-[INFO]    org.junit.platform:junit-platform-commons:jar:1.10.0:compile -- module org.junit.platform.commons
-[INFO]    org.apiguardian:apiguardian-api:jar:1.1.2:compile -- module org.apiguardian.api
-
-Начало скачивания четырёх JAR, по строкам Downloading журнала Maven:
-org.junit.jupiter:junit-jupiter-api:5.10.0
-org.opentest4j:opentest4j:1.3.0
-org.junit.platform:junit-platform-commons:1.10.0
-org.apiguardian:apiguardian-api:1.1.2
-
-Завершение скачивания этих JAR, по строкам Downloaded:
-org.junit.jupiter:junit-jupiter-api:5.10.0
-org.opentest4j:opentest4j:1.3.0
-org.apiguardian:apiguardian-api:1.1.2
-org.junit.platform:junit-platform-commons:1.10.0
-
-Фрагмент Maven dependency:tree -Dverbose:
-[INFO] \- org.junit.jupiter:junit-jupiter-api:jar:5.10.0:compile
-[INFO]    +- org.opentest4j:opentest4j:jar:1.3.0:compile
-[INFO]    +- org.junit.platform:junit-platform-commons:jar:1.10.0:compile
-[INFO]    |  \- (org.apiguardian:apiguardian-api:jar:1.1.2:compile - omitted for duplicate)
-[INFO]    \- org.apiguardian:apiguardian-api:jar:1.1.2:compile
-
-Состав и версии совпали: корневой пакет и три зависимости. UniPM сохраняет общее ребро platform-commons -> apiguardian; Maven помечает повторное включение как omitted for duplicate. В списке UniPM apiguardian также встречается один раз.
-
-Порядок различается по смыслу. UniPM вычисляет порядок «зависимость раньше зависимого»: apiguardian идёт перед platform-commons, корень — последним. dependency:resolve показывает порядок classpath. Фактические скачивания Maven не следуют топологическому порядку: запросы пересекаются, поэтому порядок завершения отличается от порядка начала. Кэш при повторном запуске устраняет уже выполненные скачивания. POM и артефакты самого Maven-плагина в приведённые списки JAR пакета не включены.
-
-Оба запуска завершились успешно. Maven используется только для сравнения; UniPM не вызывает его и не использует его библиотеки. Результат относится к этому примеру: parent, BOM и dependencyManagement по-прежнему не поддерживаются UniPM.
-
-Описание порядка dependency:resolve: https://maven.apache.org/plugins/maven-dependency-plugin/resolve-mojo.html#sort
-Стадии работы Maven Resolver: https://maven.apache.org/resolver/how-resolver-works.html
+Состав и версии совпали. UniPM ставит зависимости перед использующими их пакетами; Maven выводит порядок classpath

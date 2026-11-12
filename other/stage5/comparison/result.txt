@@ -1,0 +1,11 @@
+Сравнение визуализации UniPM и Maven
+
+1. junit:junit:4.13.2: UniPM дополнительно показывает hamcrest-library:1.3 (scope=test); Maven исключает её из транзитивных зависимостей
+
+2. org.junit.jupiter:junit-jupiter-api:5.10.0: состав и версии совпали. Общий apiguardian - один узел SVG; повтор в ASCII отмечен [already shown], в Maven- omitted for duplicate
+
+3. org.apiguardian:apiguardian-api:1.1.2: зависимостей нет в обоих инструментах
+
+Цикл A - B - C - A: SVG сохраняет связи, ASCII прекращает раскрытие на повторе
+
+SVG: other/stage5/examples/. Вывод Maven: соседние junit.txt, jupiter.txt, apiguardian.txt

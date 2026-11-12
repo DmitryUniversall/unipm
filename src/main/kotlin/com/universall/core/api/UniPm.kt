@@ -5,6 +5,7 @@ import com.universall.core.api.model.pkg.PackageInfo
 import com.universall.core.impl.UniPmImpl
 import com.universall.core.impl.data.client.HttpTextClient
 import com.universall.core.impl.data.maven.MavenPomFetcher
+import com.universall.core.impl.data.render.MermaidSvgRenderer
 import com.universall.core.impl.data.test.TestRepositoryLoader
 import com.universall.core.impl.domain.graph.DependencyGraphBuilder
 import com.universall.core.impl.domain.graph.order.DependencyOrderResolver
@@ -18,7 +19,13 @@ interface UniPm {
     fun run(output: (String) -> Unit)
 
     companion object {
-        fun create(config: AppConfig, packageInfo: PackageInfo, httpClient: HttpClient, json: Json): UniPm {
+        fun create(
+            config: AppConfig,
+            packageInfo: PackageInfo,
+            httpClient: HttpClient,
+            json: Json,
+            mermaidCommand: List<String>,
+        ): UniPm {
             val resolver = if (config.testMode) {
                 TestDependenciesResolver(packageInfo = packageInfo, loader = TestRepositoryLoader(json = json))
             } else {
@@ -30,6 +37,7 @@ interface UniPm {
                 config = config,
                 graphBuilder = DependencyGraphBuilder(resolver = resolver),
                 orderResolver = DependencyOrderResolver(),
+                svgRenderer = MermaidSvgRenderer(command = mermaidCommand),
             )
         }
     }

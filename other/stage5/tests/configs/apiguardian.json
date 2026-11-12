@@ -1,0 +1,9 @@
+{
+    "test_mode": false,
+    "output_file": "other/stage5/examples/apiguardian.svg",
+    "overwrite_output": true,
+    "ascii_tree": true,
+    "max_depth": 10,
+    "exclude_substring": "",
+    "load_order": false
+}

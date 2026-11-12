@@ -27,6 +27,7 @@ fun main(args: Array<String>) = handleErrors {
             packageInfo = packageInfo,
             httpClient = httpClient,
             json = Json,
+            mermaidCommand = listOf("node", "node_modules/@mermaid-js/mermaid-cli/src/cli.js"),
         )
 
         uniPM.run(output = ::println)
