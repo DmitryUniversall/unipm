@@ -2,34 +2,28 @@ package com.universall.core.impl
 
 import com.universall.core.api.UniPm
 import com.universall.core.api.model.config.AppConfig
-import com.universall.core.api.model.pkg.PackageInfo
 import com.universall.core.impl.config.validation.CoreAppConfigValidator
-import com.universall.core.impl.domain.MavenDependenciesResolver
+import com.universall.core.impl.domain.graph.DependencyGraphBuilder
+import com.universall.core.impl.domain.model.graph.DependencyGraph
 
 internal class UniPmImpl(
     private val config: AppConfig,
-    private val packageInfo: PackageInfo,
-    private val resolver: MavenDependenciesResolver,
+    private val graphBuilder: DependencyGraphBuilder,
 ) : UniPm {
     private val coreConfigValidator = CoreAppConfigValidator()
 
     override fun run(output: (String) -> Unit) {
         coreConfigValidator.validate(config = config)
-        require(value = !config.testMode) { "Test repository mode will be available at stage 3" }
 
-        val dependencies = resolver.resolve(packageInfo = packageInfo)
+        val graph = graphBuilder.build(maxDepth = config.maxDepth, excludeSubstring = config.excludeSubstring)
+        printGraph(graph = graph, output = output)
+    }
 
-        output("Direct dependencies of ${packageInfo.name}:${packageInfo.version}:")
+    private fun printGraph(graph: DependencyGraph, output: (String) -> Unit) {
+        output("Dependencies of ${graph.root}:")
 
-        if (dependencies.isEmpty()) {
-            output("No direct dependencies.")
-            return
-        }
-
-        for (dependency in dependencies) {
-            val optional = if (dependency.optional == "true") ", optional" else ""
-
-            output("${dependency.groupId}:${dependency.artifactId}:${dependency.version} [scope=${dependency.scope}$optional]")
+        for ((name, dependencies) in graph.dependencies) {
+            output("$name -> ${dependencies.joinToString(separator = ", ").ifEmpty { "[]" }}")
         }
     }
 }

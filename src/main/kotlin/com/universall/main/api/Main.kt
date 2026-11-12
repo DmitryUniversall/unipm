@@ -26,6 +26,7 @@ fun main(args: Array<String>) = handleErrors {
             config = config,
             packageInfo = packageInfo,
             httpClient = httpClient,
+            json = Json,
         )
 
         uniPM.run(output = ::println)

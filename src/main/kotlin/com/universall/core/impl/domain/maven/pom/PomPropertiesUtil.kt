@@ -1,6 +1,6 @@
-package com.universall.core.impl.domain
+package com.universall.core.impl.domain.maven.pom
 
-import com.universall.core.impl.domain.model.MavenDependency
+import com.universall.core.impl.domain.model.maven.MavenDependency
 
 internal class PomPropertiesUtil {
     fun substitutePropertiesToDependency(dependency: MavenDependency, properties: Map<String, String>): MavenDependency = dependency.copy(

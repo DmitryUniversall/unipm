@@ -1,9 +1,9 @@
 package com.universall.core.impl.data.maven
 
 import com.universall.core.impl.data.client.HttpTextClient
-import com.universall.core.impl.domain.PomParser
-import com.universall.core.impl.domain.model.MavenCoordinates
-import com.universall.core.impl.domain.model.PomDocument
+import com.universall.core.impl.domain.maven.pom.PomParser
+import com.universall.core.impl.domain.model.maven.MavenCoordinates
+import com.universall.core.impl.domain.model.maven.PomDocument
 import java.net.URI
 
 internal class MavenPomFetcher(

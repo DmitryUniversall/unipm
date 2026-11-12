@@ -1,8 +1,8 @@
-package com.universall.core.impl.domain
+package com.universall.core.impl.domain.maven.pom
 
 import com.universall.common.api.xml.*
-import com.universall.core.impl.domain.model.MavenDependency
-import com.universall.core.impl.domain.model.PomDocument
+import com.universall.core.impl.domain.model.maven.MavenDependency
+import com.universall.core.impl.domain.model.maven.PomDocument
 import org.w3c.dom.Element
 import org.xml.sax.InputSource
 import org.xml.sax.SAXException

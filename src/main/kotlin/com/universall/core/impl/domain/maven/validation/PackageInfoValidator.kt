@@ -1,7 +1,7 @@
-package com.universall.core.impl.domain
+package com.universall.core.impl.domain.maven.validation
 
 import com.universall.core.api.model.pkg.PackageInfo
-import com.universall.core.impl.domain.model.MavenCoordinates
+import com.universall.core.impl.domain.model.maven.MavenCoordinates
 import java.net.URI
 
 internal class PackageInfoValidator {
