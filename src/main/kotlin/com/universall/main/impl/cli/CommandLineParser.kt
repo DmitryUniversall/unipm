@@ -5,7 +5,7 @@ import com.universall.common.api.cli.LaunchOptionKey
 import com.universall.common.api.cli.LaunchOptionsParser
 import com.universall.main.impl.model.cli.LaunchOptions
 
-class CommandLineParser {
+internal class CommandLineParser {
     fun parse(arguments: Array<String>): LaunchOptions {
         val values = parser.parse(arguments = arguments)
 

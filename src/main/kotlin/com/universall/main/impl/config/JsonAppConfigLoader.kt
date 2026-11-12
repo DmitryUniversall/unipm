@@ -1,27 +1,14 @@
 package com.universall.main.impl.config
 
-import com.universall.common.api.config.AppConfigLoader
+import com.universall.common.api.config.ConfigLoader
 import com.universall.core.api.model.config.AppConfig
 import kotlinx.serialization.json.Json
-import java.io.IOException
-import java.nio.file.Files
 import java.nio.file.Path
 
-class JsonAppConfigLoader(
-    private val path: Path,
-    private val json: Json,
-) : AppConfigLoader {
-    override fun loadConfig(): AppConfig {
-        val text = try {
-            Files.readString(path)
-        } catch (exception: IOException) {
-            throw IllegalArgumentException("Cannot read configuration '$path': ${exception.message}", exception)
-        }
-
-        return try {
-            json.decodeFromString<JsonAppConfigDocument>(string = text).toAppConfig()
-        } catch (exception: IllegalArgumentException) {
-            throw IllegalArgumentException("Invalid configuration '$path': ${exception.message}", exception)
-        }
-    }
-}
+internal class JsonAppConfigLoader(
+    path: Path,
+    json: Json,
+) : ConfigLoader<AppConfig>(
+    path = path,
+    parseConfig = { text -> json.decodeFromString<JsonAppConfigDocument>(string = text).toAppConfig() }
+)

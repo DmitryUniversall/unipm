@@ -3,7 +3,7 @@ package com.universall.core.impl
 import com.universall.core.api.model.config.AppConfig
 import com.universall.core.impl.config.validation.CoreAppConfigValidator
 
-class UniPMImpl(
+internal class UniPMImpl(
     private val config: AppConfig,
 ) {
     private val coreConfigValidator = CoreAppConfigValidator()

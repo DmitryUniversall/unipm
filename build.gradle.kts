@@ -21,7 +21,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("com.universall.MainKt")
+    mainClass.set("com.universall.main.api.MainKt")
 }
 
 tasks.test {

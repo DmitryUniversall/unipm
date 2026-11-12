@@ -1,14 +1,13 @@
 package com.universall.core.impl.config.validation
 
-import com.universall.common.api.config.AppConfigValidator
 import com.universall.core.api.model.config.AppConfig
 import java.nio.file.Files
 import java.nio.file.InvalidPathException
 import java.nio.file.LinkOption
 import java.nio.file.Path
 
-internal class CoreAppConfigValidator : AppConfigValidator {
-    override fun validate(config: AppConfig) {
+internal class CoreAppConfigValidator {
+    fun validate(config: AppConfig) {
         validateOutputFile(value = config.outputFile, overwriteOutput = config.overwriteOutput)
         validateMaxDepth(value = config.maxDepth)
     }
