@@ -1,0 +1,9 @@
+{
+    "test_mode": true,
+    "output_file": "demo-test.svg",
+    "overwrite_output": true,
+    "ascii_tree": true,
+    "max_depth": 10,
+    "exclude_substring": "",
+    "load_order": true
+}
