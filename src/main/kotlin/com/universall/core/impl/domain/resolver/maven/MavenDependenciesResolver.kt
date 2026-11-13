@@ -23,15 +23,23 @@ internal class MavenDependenciesResolver(
     }
 
     override fun resolve(coordinates: PackageCoordinates): List<PackageCoordinates> {
-        val mavenCoordinates = createCoordinates(name = coordinates.name, version = coordinates.version)
+        val mavenCoordinates = createCoordinates(
+            name = coordinates.name,
+            version = coordinates.version,
+        )
         validator.validateCoordinates(coordinates = mavenCoordinates)
 
-        val document = pomFetcher.fetch(repository = packageInfo.repository, coordinates = mavenCoordinates)
+        val document = pomFetcher.fetch(
+            repository = packageInfo.repository,
+            coordinates = mavenCoordinates,
+        )
         return pomResolver.resolve(document = document, coordinates = mavenCoordinates)
     }
 
     private fun createCoordinates(name: String, version: String): MavenCoordinates {
-        require(value = packageName.matches(input = name)) { "Package name must have the form groupId:artifactId" }
+        require(value = packageName.matches(input = name)) {
+            "Package name must have the form groupId:artifactId"
+        }
 
         return MavenCoordinates(
             groupId = name.substringBefore(delimiter = ":"),

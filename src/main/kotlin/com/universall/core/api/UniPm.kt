@@ -27,9 +27,15 @@ interface UniPm {
             mermaidCommand: List<String>,
         ): UniPm {
             val resolver = if (config.testMode) {
-                TestDependenciesResolver(packageInfo = packageInfo, loader = TestRepositoryLoader(json = json))
+                TestDependenciesResolver(
+                    packageInfo = packageInfo,
+                    loader = TestRepositoryLoader(json = json),
+                )
             } else {
-                val pomFetcher = MavenPomFetcher(httpClient = HttpTextClient(client = httpClient), parser = PomParser())
+                val pomFetcher = MavenPomFetcher(
+                    httpClient = HttpTextClient(client = httpClient),
+                    parser = PomParser(),
+                )
                 MavenDependenciesResolver(packageInfo = packageInfo, pomFetcher = pomFetcher)
             }
 

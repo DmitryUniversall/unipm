@@ -20,10 +20,14 @@ internal class TestDependenciesResolver(
     }
 
     override fun resolve(coordinates: PackageCoordinates): List<PackageCoordinates> =
-        requireNotNull(value = packages[coordinates]) { "Package '$coordinates' is missing from the test repository" }
+        requireNotNull(value = packages[coordinates]) {
+            "Package '$coordinates' is missing from the test repository"
+        }
 
     private fun loadPackages(): Map<PackageCoordinates, List<PackageCoordinates>> {
-        require(value = packageInfo.repository.isNotBlank()) { "Test repository path must not be blank" }
+        require(value = packageInfo.repository.isNotBlank()) {
+            "Test repository path must not be blank"
+        }
 
         val packages = loader.load(path = Path.of(packageInfo.repository))
             .mapKeys { (name, _) -> parseCoordinates(value = name) }
@@ -31,7 +35,9 @@ internal class TestDependenciesResolver(
 
         for ((name, dependencies) in packages) {
             for (dependency in dependencies) {
-                require(value = dependency in packages) { "Unknown dependency '$dependency' of '$name' in the test repository" }
+                require(value = dependency in packages) {
+                    "Unknown dependency '$dependency' of '$name' in the test repository"
+                }
             }
         }
 
@@ -39,7 +45,10 @@ internal class TestDependenciesResolver(
     }
 
     private fun parseCoordinates(value: String): PackageCoordinates {
-        require(value = packageCoordinates.matches(input = value)) { "Test package must have the form NAME:version, with NAME in uppercase Latin letters: $value" }
+        require(value = packageCoordinates.matches(input = value)) {
+            "Test package must have the form NAME:version, " +
+                "with NAME in uppercase Latin letters: $value"
+        }
 
         return PackageCoordinates(
             name = value.substringBefore(delimiter = ":"),

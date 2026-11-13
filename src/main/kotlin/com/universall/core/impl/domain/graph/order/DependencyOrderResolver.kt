@@ -22,7 +22,9 @@ internal class DependencyOrderResolver {
                 continue
             }
 
-            require(value = active.add(element = step.coordinates)) { "Cannot determine dependency loading order: cycle at '${step.coordinates}'" }
+            require(value = active.add(element = step.coordinates)) {
+                "Cannot determine dependency loading order: cycle at '${step.coordinates}'"
+            }
             stack.addLast(element = TraversalStep(coordinates = step.coordinates, complete = true))
 
             for (dependency in graph.dependencies.getValue(key = step.coordinates).asReversed()) {

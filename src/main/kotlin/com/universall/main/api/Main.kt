@@ -48,7 +48,9 @@ private fun loadPackageInfo(options: LaunchOptions): PackageInfo {
         return PackageInfoCliParser().parse(value = packageSpec)
     }
 
-    val path = Path.of(requireNotNull(value = options.packageInfoPath) { "Missing --package-info path" })
+    val path = Path.of(
+        requireNotNull(value = options.packageInfoPath) { "Missing --package-info path" }
+    )
     return JsonPackageInfoLoader(path = path, json = Json).loadConfig()
 }
 

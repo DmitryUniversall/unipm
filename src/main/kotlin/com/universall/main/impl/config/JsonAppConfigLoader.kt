@@ -10,5 +10,7 @@ internal class JsonAppConfigLoader(
     json: Json,
 ) : ConfigLoader<AppConfig>(
     path = path,
-    parseConfig = { text -> json.decodeFromString<JsonAppConfigDocument>(string = text).toAppConfig() }
+    parseConfig = { text ->
+        json.decodeFromString<JsonAppConfigDocument>(string = text).toAppConfig()
+    }
 )

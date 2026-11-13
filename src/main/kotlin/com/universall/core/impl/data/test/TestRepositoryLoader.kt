@@ -12,13 +12,19 @@ internal class TestRepositoryLoader(
         val text = try {
             Files.readString(path)
         } catch (exception: IOException) {
-            throw IllegalArgumentException("Cannot read test repository '$path': ${exception.message}", exception)
+            throw IllegalArgumentException(
+                "Cannot read test repository '$path': ${exception.message}",
+                exception,
+            )
         }
 
         return try {
             json.decodeFromString<Map<String, List<String>>>(string = text)
         } catch (exception: IllegalArgumentException) {
-            throw IllegalArgumentException("Invalid test repository '$path': ${exception.message}", exception)
+            throw IllegalArgumentException(
+                "Invalid test repository '$path': ${exception.message}",
+                exception,
+            )
         }
     }
 }

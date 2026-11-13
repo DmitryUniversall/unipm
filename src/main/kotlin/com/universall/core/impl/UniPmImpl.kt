@@ -24,7 +24,10 @@ internal class UniPmImpl(
     override fun run(output: (String) -> Unit) {
         coreConfigValidator.validate(config = config)
 
-        val graph = graphBuilder.build(maxDepth = config.maxDepth, excludeSubstring = config.excludeSubstring)
+        val graph = graphBuilder.build(
+            maxDepth = config.maxDepth,
+            excludeSubstring = config.excludeSubstring,
+        )
         saveSvg(graph = graph)
         output("SVG saved to ${config.outputFile}")
 

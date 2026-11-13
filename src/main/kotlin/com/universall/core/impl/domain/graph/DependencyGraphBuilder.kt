@@ -31,7 +31,9 @@ internal class DependencyGraphBuilder(
             graph[step.coordinates] = dependencies
 
             for (dependency in dependencies.asReversed()) {
-                stack.addLast(element = TraversalStep(coordinates = dependency, depth = step.depth + 1))
+                stack.addLast(
+                    element = TraversalStep(coordinates = dependency, depth = step.depth + 1),
+                )
             }
         }
 

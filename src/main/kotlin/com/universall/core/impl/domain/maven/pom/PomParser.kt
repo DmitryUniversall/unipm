@@ -18,7 +18,9 @@ internal class PomParser {
             groupId = project.text(name = "groupId"),
             artifactId = project.requiredText(name = "artifactId"),
             version = project.text(name = "version"),
-            properties = project.child(name = "properties")?.children()?.associate { it.localName to it.textContent.trim() }.orEmpty(),
+            properties = project.child(name = "properties")?.children()?.associate {
+                it.localName to it.textContent.trim()
+            }.orEmpty(),
             dependencies = readDependencies(element = project),
         )
     }
@@ -39,7 +41,12 @@ internal class PomParser {
         }
 
         require(value = project.localName == "project") { "POM root element must be 'project'" }
-        require(value = project.namespaceURI == null || project.namespaceURI == "http://maven.apache.org/POM/4.0.0") { "Unsupported POM namespace: ${project.namespaceURI}" }
+        require(
+            value = project.namespaceURI == null ||
+                project.namespaceURI == "http://maven.apache.org/POM/4.0.0",
+        ) {
+            "Unsupported POM namespace: ${project.namespaceURI}"
+        }
 
         return project
     }

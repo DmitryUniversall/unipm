@@ -4,18 +4,25 @@ import com.universall.core.impl.domain.model.graph.DependencyGraph
 
 internal class MermaidGraphFormatter {
     fun format(graph: DependencyGraph): String {
-        val identifiers = graph.dependencies.keys.withIndex().associate { it.value to "n${it.index}" }
+        val identifiers = graph.dependencies.keys.withIndex().associate {
+            it.value to "n${it.index}"
+        }
 
         return buildString {
             appendLine(value = "flowchart TD")
 
             for ((coordinates, identifier) in identifiers) {
-                appendLine(value = "    $identifier[\"${escape(value = coordinates.toString())}\"]")
+                appendLine(
+                    value = "    $identifier[\"${escape(value = coordinates.toString())}\"]",
+                )
             }
 
             for ((coordinates, dependencies) in graph.dependencies) {
                 for (dependency in dependencies) {
-                    appendLine(value = "    ${identifiers.getValue(key = coordinates)} --> ${identifiers.getValue(key = dependency)}")
+                    appendLine(
+                        value = "    ${identifiers.getValue(key = coordinates)} --> " +
+                                identifiers.getValue(key = dependency),
+                    )
                 }
             }
         }

@@ -11,7 +11,9 @@ internal class CommandLineParser {
 
         val packageSpec = values[packageKey]
         val packageInfoPath = values[packageInfoKey]
-        require(value = (packageSpec != null) != (packageInfoPath != null)) { "Specify exactly one of --package or --package-info" }
+        require(value = (packageSpec != null) != (packageInfoPath != null)) {
+            "Specify exactly one of --package or --package-info"
+        }
 
         return LaunchOptions(
             configPath = values[configKey],

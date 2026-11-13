@@ -12,13 +12,19 @@ open class ConfigLoader<T>(
         val text = try {
             Files.readString(path)
         } catch (exception: IOException) {
-            throw IllegalArgumentException("Cannot read configuration '$path': ${exception.message}", exception)
+            throw IllegalArgumentException(
+                "Cannot read configuration '$path': ${exception.message}",
+                exception,
+            )
         }
 
         return try {
             parseConfig(text)
         } catch (exception: IllegalArgumentException) {
-            throw IllegalArgumentException("Invalid configuration '$path': ${exception.message}", exception)
+            throw IllegalArgumentException(
+                "Invalid configuration '$path': ${exception.message}",
+                exception,
+            )
         }
     }
 }

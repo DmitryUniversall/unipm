@@ -25,12 +25,17 @@ internal class HttpTextClient(
             throw IllegalArgumentException("Loading '$uri' was interrupted", exception)
         }
 
-        require(value = response.statusCode() in 200..299) { "Cannot load '$uri': HTTP ${response.statusCode()}" }
+        require(value = response.statusCode() in 200..299) {
+            "Cannot load '$uri': HTTP ${response.statusCode()}"
+        }
 
         return try {
             decode(response.body())
         } catch (exception: IllegalArgumentException) {
-            throw IllegalArgumentException("Invalid response from '$uri': ${exception.message}", exception)
+            throw IllegalArgumentException(
+                "Invalid response from '$uri': ${exception.message}",
+                exception,
+            )
         }
     }
 }
