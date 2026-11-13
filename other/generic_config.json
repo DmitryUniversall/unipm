@@ -1,9 +1,0 @@
-{
-    "test_mode": false,
-    "output_file": "graph.svg",
-    "overwrite_output": false,
-    "ascii_tree": false,
-    "max_depth": 3,
-    "exclude_substring": "",
-    "load_order": true
-}
